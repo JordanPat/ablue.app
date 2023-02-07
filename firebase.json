@@ -20,6 +20,7 @@
     }
   ],
   "hosting": {
+    "site": "a-blue",
     "source": "hosting",
     "ignore": [
       "firebase.json",
