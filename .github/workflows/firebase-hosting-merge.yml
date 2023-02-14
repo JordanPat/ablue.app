@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "DEPLOYING TO LIVE" && ls ~ && echo && ls ./ && echo && cd ./nextjs-blog
+      - run: echo "DEPLOYING TO LIVE:\'home\'" && ls ~ && echo "\'./\'" && ls ./ && echo "\'../\'" && ls ../
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entrypoint: /nextjs-blog
+          entrypoint: nextjs-blog
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ACADIANBLUE }}'
           channelId: live
