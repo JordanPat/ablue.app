@@ -1,9 +1,21 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-import { initFirebase } from '../lib/firebase/initFirebase';
+import { initFirebase, app, db } from '../lib/firebase/initFirebase';
+import { collection, addDoc } from "firebase/firestore"; 
 
 initFirebase();
+try {
+  console.log(">>> Attempting Firestore write:")
+  const docRef = await addDoc(collection(db, "users"), {
+    first: "Ada",
+    last: "Lovelace",
+    born: 1815
+  });
+  console.log("Document written with ID: ", docRef.id);
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
 
 export default function Home() {
   return (
@@ -50,6 +62,13 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+        </div>
+        <div>
+          {
+          
+       
+          
+          }
         </div>
       </main>
 
