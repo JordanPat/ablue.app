@@ -1,6 +1,22 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
+import { initFirebase, app, db } from '../lib/firebase/initFirebase';
+import { collection, addDoc } from "firebase/firestore"; 
+
+initFirebase();
+// try {
+//   console.log(">>> Attempting Firestore write:")
+//   const docRef = await addDoc(collection(db, "users"), {
+//     first: "Ada",
+//     last: "Lovelace",
+//     born: 1815
+//   });
+//   console.log("Document written with ID: ", docRef.id);
+// } catch (e) {
+//   console.error("Error adding document: ", e);
+// }
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -11,7 +27,7 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Learning and Github workflows with dev previews <a href="https://nextjs.org">Next.js!</a>
+          Ablue.app uses <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
@@ -46,6 +62,13 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+        </div>
+        <div>
+          {
+          
+       
+          
+          }
         </div>
       </main>
 
