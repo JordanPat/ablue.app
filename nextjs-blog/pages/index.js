@@ -11,7 +11,7 @@ export default function Home() {
 
       <main>
         <h1 className={styles.title}>
-          Learning and Github workflows <a href="https://nextjs.org">Next.js!</a>
+          Learning and Github workflows with dev previews <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
