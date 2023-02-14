@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "DEPLOYING TO LIVE" && ls ~ && ls ./ && cd ~/nextjs-blog
+      - run: echo "DEPLOYING TO LIVE" && ls ~ && echo && ls ./ && echo && cd ./nextjs-blog
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           entrypoint: /nextjs-blog
