@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "target": "ablue.app",
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

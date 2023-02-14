@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "acadianblue"
+  },
+  "targets": {
+    "acadianblue": {
+      "hosting": {
+        "ablue.app": [
+          "a-blue"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
