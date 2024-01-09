@@ -7,18 +7,14 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - master
 jobs:
-  deploy_live_website:
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "DEPLOYING TO LIVE" && cd nextjs-blog && npm ci
+      - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entrypoint: nextjs-blog
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ACADIANBLUE }}'
           channelId: live
           projectId: acadianblue
-          target: ablue.app
-        env: 
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
