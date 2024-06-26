@@ -1,44 +1,40 @@
+require("dotenv").config();
+const { client } = require('./config/db.config');
+const port = process.env.PORT || 3000;
+
 const express = require("express");
-const cors = require("cors");
 
 const app = express();
+app.use(logger); // enableing logger function to all of server also can use router.use() for specific routes
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
 
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
-app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my application." });
+app.get('/', async (req, res) => {
+  console.log("inside app.get('/'...)");
+  try {
+    await client.connect();
+    const result = await client.db("admin").command({ ping: 1 });
+    res.send('Pinged your deployment. You successfully connected to MongoDB!');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Failed to connect to MongoDB');
+  } finally {
+    await client.close();
+  }
 });
 
-require("./app/routes/tutorial.routes")(app);
+// router for all urls starting with '/api/Users'
+const userRouter = require("./routes/users.routes")
+app.use("/api/users", userRouter)
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+const exerciseRouter = require("./routes/exercise.routes")
+app.use("/api/exercises", exerciseRouter)
+
+// logger middleware for outputting original url to console
+function logger(req, res, next) {
+  console.log("-LOG:", req.originalUrl)
+  next()
+}
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
-
-//database
-const db = require("./app/models");
-db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch(err => {
-    console.log("Cannot connect to the database!", err);
-    process.exit();
-  });
