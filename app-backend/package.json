@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev start": "nodemon server.js",
     "docker-build": "docker build -t your-app-name .",
     "docker-run": "docker run -p 3000:3000 your-app-name",
     "docker-stop": "docker stop $(docker ps -q --filter ancestor=your-app-name)",
