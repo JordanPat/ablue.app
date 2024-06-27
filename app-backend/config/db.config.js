@@ -6,10 +6,13 @@ const {
   DB_NAME,
 } = process.env;
 
-require('dotenv').config();
+// require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const uri = "mongodb+srv://dbuser:"+DB_PASSWORD+"@cluster0.evadi6l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const uri = "mongodb+srv://dbuser:"+DB_PASSWORD+"@cluster0.evadi6l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/workouts?retryWrites=true&w=majority&appName=Cluster0`;
+
+const db_port = DB_PORT;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -20,5 +23,5 @@ const client = new MongoClient(uri, {
   }
 });
 
-module.exports = { client };
+module.exports = { client, uri, db_port };
 

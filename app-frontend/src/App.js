@@ -1,24 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import ExerciseForm from './components/newExercise';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h3>
+          aBlue Workout app.
+        </h3>
+
+        <ExerciseForm />
+        <br/>
+        <br/>
+        <div>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://acadianblue.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          llc
         </a>
+        </div>
       </header>
+      
     </div>
+   
   );
 }
 
