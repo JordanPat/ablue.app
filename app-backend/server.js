@@ -5,9 +5,9 @@ const cors = require('cors');
 
 const Exercise = require("./models/exercises.model");
 const User = require("./models/users.model");
-const { uri, db_port } = require('./config/db.config'); 
+const { uri, DEV_PORT } = require('./config/db.config'); 
 const app = express();
-const port = db_port || 5000;
+const port = DEV_PORT || 5000;
 
 //middleware
 app.use(logger); // enableing logger function to all of server also can use router.use() for specific routes
@@ -47,6 +47,7 @@ app.get('/', async (req,res)=>{
   // res.send(user)
 });
 
+console.log("uri: ", uri)
 // MongoDB connection
 mongoose.connect( uri, {})
 .then(() => {

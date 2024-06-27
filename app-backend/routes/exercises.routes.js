@@ -51,10 +51,7 @@ router.post('/add', async (req, res) => {
     });
 
     // Save the exercise to the database
-    // const savedExercise = await newExercise.save();
-    const savedExercise = await exerciseCollection.insertOne({
-      newExercise
-    })
+    const savedExercise = await newExercise.save();
 
     res.status(201).json(savedExercise); // Respond with the saved exercise
   } catch (error) {
@@ -73,7 +70,8 @@ router.route('/:id')
   .get( async (req, res) => {
     console.log("inside app.get('/exercises/:id'...)");
     try {
-      const { id } = req.params.id;
+      const { id } = req.params;
+      console.log(`get exercise id: ${req.params.id}`)
       const exercises = await Exercise.findById(id);
       res.json(exercises);
     } catch (error) {
@@ -84,7 +82,7 @@ router.route('/:id')
   // Update an existing exercise (PUT)
   .put(async (req, res) => {
     try {
-      const { id } = req.params.id;
+      const { id } = req.params;
       const updatedExercise = await Exercise.findByIdAndUpdate(id, req.body, { new: true });
 
       if (!updatedExercise) {
@@ -114,14 +112,14 @@ router.route('/:id')
   .delete(async (req, res) => {
     console.log("delete exercise by id")
     try {
-      const { id } = req.params.id;
+      const { id, name } = req.params;
       const deletedExercise = await Exercise.findByIdAndDelete(id);
 
       if (!deletedExercise) {
         return res.status(404).json({ error: 'Exercise not found' });
       }
 
-      res.json({ message: 'Exercise deleted successfully' });
+      res.status(200).json({ message: `Exercise ${name} deleted successfully` });
     } catch (error) {
       console.error('Error deleting exercise:', error);
       res.status(500).json({ error: 'Failed to delete exercise' });
