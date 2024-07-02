@@ -3,8 +3,6 @@ const express = require("express");
 const mongoose = require('mongoose'); 
 const cors = require('cors');
 
-const Exercise = require("./models/exercises.model");
-const User = require("./models/users.model");
 const { uri, DEV_PORT } = require('./config/db.config'); 
 const app = express();
 const port = DEV_PORT || 5000;
@@ -23,8 +21,17 @@ app.use(cors(corsOptions));
 const usersRouter = require("./routes/users.routes")
 app.use("/api/users", usersRouter)
 
+const workoutsRouter = require("./routes/workouts.routes")
+app.use("/api/workouts", workoutsRouter)
+
 const exercisesRouter = require("./routes/exercises.routes")
 app.use("/api/exercises", exercisesRouter)
+
+const workoutExercisesRouter = require("./routes/workoutExercises.routes")
+app.use("/api/workout-exercises", workoutExercisesRouter)
+
+const userMaxesRouter = require("./routes/userMaxes.routes")
+app.use("/api/user-maxes", userMaxesRouter)
 
 // logger middleware for outputting original url to console
 function logger(req, res, next) {
@@ -47,7 +54,7 @@ app.get('/', async (req,res)=>{
   // res.send(user)
 });
 
-console.log("uri: ", uri)
+// console.log("uri: ", uri)
 // MongoDB connection
 mongoose.connect( uri, {})
 .then(() => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+require('dotenv').config();
 
 const ExerciseForm = () => {
   const [description, setDescription] = useState('');
@@ -7,11 +8,13 @@ const ExerciseForm = () => {
   const [exerciseName, setExerciseName] = useState('');
   const [tags, setTags] = useState('');
 
+  const backend_url = process.env.REACT_APP_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit pushed");
     try {
-      const response = await axios.post('http://localhost:5000/api/exercises/add', {
+      const response = await axios.post(backend_url+"/api/exercises", {
         description,
         modifier,
         exerciseName,
@@ -46,9 +49,7 @@ const ExerciseForm = () => {
           <label>Exercise Description:</label>
           <textarea
             value={description}
-            onChange={(e) => {
-              setDescription(e.target.value) 
-              console.log("changed description")} }
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>

@@ -6,6 +6,7 @@ const UserMax = require('../models/userMaxes.model'); // Adjust the path as need
 router.get('/', async (req, res) => {
   try {
     const userMaxes = await UserMax.find();
+    console.log("user maxes '/': ", userMaxes);
     res.json(userMaxes);
   } catch (error) {
     console.error('Error fetching user maxes:', error);
